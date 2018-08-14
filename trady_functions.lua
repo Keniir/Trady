@@ -514,7 +514,7 @@ end
 --|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 function LoadData()
 	local _split = ""
-	file = io.open( PLUGIN:GetLocalDirectory().."/trady_shops.dat", "r" )
+	file = io.open( PLUGIN:GetLocalFolder().."/trady_shops.dat", "r" )
 	if( file == nil ) then		return 1	end
 	for line in file:lines() do
 		_split = LineSplit( line, ":" )
@@ -538,7 +538,7 @@ function LoadData()
 	end
 	file:close()
 	-- / / / / / / / / / / / /
-	file = io.open( PLUGIN:GetLocalDirectory().."/trady_merchants.dat", "r" )
+	file = io.open( PLUGIN:GetLocalFolder().."/trady_merchants.dat", "r" )
 	if( file == nil ) then		return 1	end
 	for line in file:lines() do
 		_split = LineSplit( line, ":" )
@@ -561,7 +561,7 @@ function LoadData()
 end
 function SaveData()
 	local line = ""
-	file = io.open( PLUGIN:GetLocalDirectory().."/trady_shops.dat", "w" )
+	file = io.open( PLUGIN:GetLocalFolder().."/trady_shops.dat", "w" )
 	for k,v in pairs( ShopsData ) do
 		line = ""..v.ownername
 		line = line..":"..v.world
@@ -575,7 +575,7 @@ function SaveData()
 	end
 	file:close()
 	-- / / / / / / / / / / / /
-	file = io.open( PLUGIN:GetLocalDirectory().."/trady_merchants.dat", "w" )
+	file = io.open( PLUGIN:GetLocalFolder().."/trady_merchants.dat", "w" )
 	for k,v in pairs( TradersData ) do
 		if( v.cashmachine ~= nil ) then
 			line = ""..k
@@ -590,7 +590,7 @@ end
 -- * * * * *
 function LoadSettings()
 	iniFile = cIniFile()
-	iniFile:ReadFile( PLUGIN:GetLocalDirectory().."/trady_settings.ini" )
+	iniFile:ReadFile( PLUGIN:GetLocalFolder().."/trady_settings.ini" )
 	local saveMode = iniFile:GetValueSet( "Settings", "SaveMode", "Timed" )
 	local barterItem = iniFile:GetValueSet( "Settings", "BarterItem", ItemTypeToString( E_ITEM_GOLD_NUGGET ) )
 	if( saveMode == "Timed" )		then Settings.SaveMode = eSaveMode_Timed	end
@@ -605,11 +605,11 @@ function LoadSettings()
 	LOG( "Ini reading on HaltSelf: "..tostring(Settings.HaltSelfTrade) )
 	Settings.UsingProtection = 		iniFile:GetValueSetB( "Settings", "UsingProtection", 	true )
 	Settings.BreakingProtection = 	iniFile:GetValueSetB( "Settings", "BreakingProtection",true )
-	iniFile:WriteFile( PLUGIN:GetLocalDirectory().."/trady_settings.ini" )
+	iniFile:WriteFile( PLUGIN:GetLocalFolder().."/trady_settings.ini" )
 end
 function SaveSettings()
 	iniFile = cIniFile()
-	iniFile:ReadFile( PLUGIN:GetLocalDirectory().."/trady_settings.ini" )
+	iniFile:ReadFile( PLUGIN:GetLocalFolder().."/trady_settings.ini" )
 	local saveMode = iniFile:GetValueSet( "Settings", "SaveMode", "Timed" )
 	local _barter_item = iniFile:GetValueSet( "Settings", "BarterItem", ItemTypeToString( E_ITEM_GOLD_NUGGET ) )
 	if( Settings.SaveMode == eSaveMode_Timed )		then	saveMode = "Timed"		end
@@ -624,7 +624,7 @@ function SaveSettings()
 	iniFile:SetValueB( "Settings", "HaltSelfTrade", 		Settings.HaltSelfTrade, 				false )
 	iniFile:SetValueB( "Settings", "UsingProtection", 		Settings.UsingProtection, 				false )
 	iniFile:SetValueB( "Settings", "BreakingProtection", 	Settings.BreakingProtection, 			false )
-	iniFile:WriteFile( PLUGIN:GetLocalDirectory().."/trady_settings.ini" )
+	iniFile:WriteFile( PLUGIN:GetLocalFolder().."/trady_settings.ini" )
 end
 --|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 -- splits line by any desired symbol

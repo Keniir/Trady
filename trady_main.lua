@@ -83,9 +83,9 @@ function Initialize( Plugin )
 	PLUGIN:SetVersion( 2 )
 	
 	PluginManager = cRoot:Get():GetPluginManager()
-	COINY = PluginManager:GetPlugin( "Coiny" )
-	HANDY = cRoot:Get():GetPluginManager():GetPlugin( "Handy" )
-	local properHandy = HANDY:Call( "CheckForRequiedVersion", HandyRequiredVersion )
+	--COINY = cRoot:Get():GetPluginManager():CallPlugin( "Coiny" )
+	--HANDY = cRoot:Get():GetPluginManager():CallPlugin( "Handy" )
+	local properHandy = cPluginManager:CallPlugin( "Handy", "CheckForRequiedVersion", HandyRequiredVersion )
 	if( not properHandy ) then
 		LOGERROR( PLUGIN:GetName().." v"..PLUGIN:GetVersion().." needs Handy v"..HandyRequiredVersion..", shutting down" )
 		return false
@@ -99,7 +99,7 @@ function Initialize( Plugin )
 	cPluginManager.AddHook( cPluginManager.HOOK_UPDATING_SIGN, OnUpdatingSign )
 	cPluginManager.AddHook( cPluginManager.HOOK_TICK, OnTick )
 	
-	--Plugin:AddWebTab( "Trady", HandleRequest_ChestShop )
+	Plugin:AddWebTab( "Trady", HandleRequest_ChestShop )
 	LoadSettings()
 	LoadData()
 	LOG( "Initialized "..PLUGIN:GetName().." v"..PLUGIN:GetVersion() )
