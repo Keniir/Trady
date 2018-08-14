@@ -99,7 +99,7 @@ function Initialize( Plugin )
 	cPluginManager.AddHook( cPluginManager.HOOK_UPDATING_SIGN, OnUpdatingSign )
 	cPluginManager.AddHook( cPluginManager.HOOK_TICK, OnTick )
 	
-	Plugin:AddWebTab( "Trady", HandleRequest_ChestShop )
+	--Plugin:AddWebTab( "Trady", HandleRequest_ChestShop )
 	LoadSettings()
 	LoadData()
 	LOG( "Initialized "..PLUGIN:GetName().." v"..PLUGIN:GetVersion() )
